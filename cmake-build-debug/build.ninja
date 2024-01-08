@@ -55,6 +55,30 @@ build CMakeFiles/ProvaFinale.dir/src/main.cpp.obj: CXX_COMPILER__ProvaFinale_Deb
   OBJECT_DIR = CMakeFiles\ProvaFinale.dir
   OBJECT_FILE_DIR = CMakeFiles\ProvaFinale.dir\src
 
+build CMakeFiles/ProvaFinale.dir/src/Player.cpp.obj: CXX_COMPILER__ProvaFinale_Debug C$:/Users/borgo/Documents/GitHub/ProvaFinale/src/Player.cpp || cmake_object_order_depends_target_ProvaFinale
+  DEP_FILE = CMakeFiles\ProvaFinale.dir\src\Player.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++11
+  OBJECT_DIR = CMakeFiles\ProvaFinale.dir
+  OBJECT_FILE_DIR = CMakeFiles\ProvaFinale.dir\src
+
+build CMakeFiles/ProvaFinale.dir/src/Board.cpp.obj: CXX_COMPILER__ProvaFinale_Debug C$:/Users/borgo/Documents/GitHub/ProvaFinale/src/Board.cpp || cmake_object_order_depends_target_ProvaFinale
+  DEP_FILE = CMakeFiles\ProvaFinale.dir\src\Board.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++11
+  OBJECT_DIR = CMakeFiles\ProvaFinale.dir
+  OBJECT_FILE_DIR = CMakeFiles\ProvaFinale.dir\src
+
+build CMakeFiles/ProvaFinale.dir/src/Human.cpp.obj: CXX_COMPILER__ProvaFinale_Debug C$:/Users/borgo/Documents/GitHub/ProvaFinale/src/Human.cpp || cmake_object_order_depends_target_ProvaFinale
+  DEP_FILE = CMakeFiles\ProvaFinale.dir\src\Human.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++11
+  OBJECT_DIR = CMakeFiles\ProvaFinale.dir
+  OBJECT_FILE_DIR = CMakeFiles\ProvaFinale.dir\src
+
+build CMakeFiles/ProvaFinale.dir/src/Pc.cpp.obj: CXX_COMPILER__ProvaFinale_Debug C$:/Users/borgo/Documents/GitHub/ProvaFinale/src/Pc.cpp || cmake_object_order_depends_target_ProvaFinale
+  DEP_FILE = CMakeFiles\ProvaFinale.dir\src\Pc.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++11
+  OBJECT_DIR = CMakeFiles\ProvaFinale.dir
+  OBJECT_FILE_DIR = CMakeFiles\ProvaFinale.dir\src
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target ProvaFinale
@@ -63,7 +87,7 @@ build CMakeFiles/ProvaFinale.dir/src/main.cpp.obj: CXX_COMPILER__ProvaFinale_Deb
 #############################################
 # Link the executable ProvaFinale.exe
 
-build ProvaFinale.exe: CXX_EXECUTABLE_LINKER__ProvaFinale_Debug CMakeFiles/ProvaFinale.dir/src/main.cpp.obj
+build ProvaFinale.exe: CXX_EXECUTABLE_LINKER__ProvaFinale_Debug CMakeFiles/ProvaFinale.dir/src/main.cpp.obj CMakeFiles/ProvaFinale.dir/src/Player.cpp.obj CMakeFiles/ProvaFinale.dir/src/Board.cpp.obj CMakeFiles/ProvaFinale.dir/src/Human.cpp.obj CMakeFiles/ProvaFinale.dir/src/Pc.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\ProvaFinale.dir
