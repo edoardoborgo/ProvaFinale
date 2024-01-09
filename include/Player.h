@@ -8,9 +8,10 @@ public:
     Player(int playerType);
     int throwDices();
     void deposit(int value);
+    void withdraw(int value);
 
     int getMoney();
-    void setMoney(int value);
+    //void setMoney(int value);
     int getPlayerNumber();
     virtual int getPlayerType();
 

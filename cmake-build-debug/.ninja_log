@@ -1,3 +1,15 @@
 # ninja log v5
 0	289	7264146293100342	CMakeFiles/ProvaFinale.dir/main.cpp.obj	35012d83a3cd6d7d
+5	2209	7265153251953020	CMakeFiles/ProvaFinale.dir/src/Player.cpp.obj	5c45773d6438a704
 291	376	7264146293949431	ProvaFinale.exe	777f36fea6388557
+142	2212	7265153253022801	CMakeFiles/ProvaFinale.dir/src/Human.cpp.obj	acb937cae2b9c3ac
+4	385	7265157436088230	CMakeFiles/ProvaFinale.dir/src/main.cpp.obj	827d23b8670357bd
+11	142	7265153232740030	CMakeFiles/ProvaFinale.dir/src/Pc.cpp.obj	71b8be4c8bc1a100
+4	380	7265158668635475	CMakeFiles/ProvaFinale.dir/src/Board.cpp.obj	78e3998e40245386
+2137	2637	7265153257708604	CMakeFiles/ProvaFinale.dir/src/BoardBox.cpp.obj	137d07322be0a6e7
+4	685	7265159890968344	CMakeFiles/ProvaFinale.dir/src/main.cpp.obj	827d23b8670357bd
+22	739	7265159891723563	CMakeFiles/ProvaFinale.dir/src/Board.cpp.obj	78e3998e40245386
+5	1185	7265161033474253	CMakeFiles/ProvaFinale.dir/src/main.cpp.obj	827d23b8670357bd
+16	1186	7265161033899185	CMakeFiles/ProvaFinale.dir/src/BoardBox.cpp.obj	137d07322be0a6e7
+10	1226	7265161034604288	CMakeFiles/ProvaFinale.dir/src/Board.cpp.obj	78e3998e40245386
+3	1438	7265161369097209	CMakeFiles/ProvaFinale.dir/src/Board.cpp.obj	78e3998e40245386

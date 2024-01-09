@@ -2,11 +2,19 @@
 #ifndef PROVAFINALE_BOARDMANAGER_H
 #define PROVAFINALE_BOARDMANAGER_H
 
-int movePlayer(int playerPosition, int shift, int length){
-    if(playerPosition+shift>=length)
-        return (playerPosition+shift)%length;
-    else
-        return playerPosition+shift;
+#include "../include/exceptions.h"
+
+int movePlayer(int actualPosition, int shift){
+    static constexpr int arrayLength = 28;
+    int newPosition;
+    if(actualPosition+shift >= arrayLength){
+        newPosition=(actualPosition+shift) % arrayLength;
+        //giro completo dell'array, ritiro un premio per il passaggio
+        throw completeTurn(newPosition);
+    }else{
+        newPosition=actualPosition+shift;
+    }
+    return newPosition;
 }
 
 #endif //PROVAFINALE_BOARDMANAGER_H
