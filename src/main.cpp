@@ -7,6 +7,11 @@ int main(int argc, char* argv[]) {
 
     playBoard = new Board(1);
     playBoard->show();
+    while(true){
+        playBoard->move();
+        playBoard->nextPlayerRound();
+        playBoard->show();
+    }
 
     if(argc==2){
         //viene passato un parametro, COMPUTER oppure HUMAN

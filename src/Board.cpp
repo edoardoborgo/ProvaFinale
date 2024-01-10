@@ -146,29 +146,49 @@ void Board::assignBoxType(){
 }
 
 void Board::show() {
-    std::cout << "\t 1\t 2\t 3\t 4\t 5\t 6\t 7\t 8\nA";
+    std::cout << "\t\t 1\t\t 2\t\t 3\t\t 4\t\t 5\t\t 6\t\t 7\t\t 8\nA";
     //output prima riga
 
-    //std::cout << listBox[0]->toString();
-    //std::cout << listBox[1]->toString();
+    std::string output;
 
     for(int i=0;i<8;i++){
-        std::cout << "\t|" << listBox[i]->toString();
+
+        if(output.length()>5){
+            output = "\t|" + listBox[i]->toString();
+        }else{
+            output = "\t\t|" + listBox[i]->toString();
+        }
         for(int j=0;j<4;j++){
             if(listPosition[j] == i)
-                std::cout << j+1; //numero giocatore
+                output +=  std::to_string(j+1); //numero giocatore
         }
-        std::cout << '|';
+        output += "|";
+        std::cout << output;
+
     }
     char lineIndex = 'B';
     int leftColumnIndex=27, rightColumnIndex=8;
+
     for(int i=0;i<6;i++){
-        std::cout << std::endl << lineIndex << "\t|" << listBox[leftColumnIndex]->toString();
+        if(output.length()>5){
+            output = lineIndex;
+            output += "\t|" + listBox[leftColumnIndex]->toString();
+        }else{
+            output = lineIndex;
+            output += "\t\t|" + listBox[leftColumnIndex]->toString();
+        }
+
+
         for(int j=0;j<4;j++){
             if(listPosition[j] == leftColumnIndex)
-                std::cout << j+1;
+                output += std::to_string(j+1);
         }
-        std::cout << "|\t\t\t\t\t\t\t|" << listBox[rightColumnIndex]->toString();
+
+        if(output.length()>6)
+            std::cout << std::endl <<  output<< "|\t\t\t\t\t\t\t\t\t\t\t\t\t|" << listBox[rightColumnIndex]->toString();
+        else
+            std::cout << std::endl <<  output << "|\t\t\t\t\t\t\t\t\t\t\t\t\t\t|" << listBox[rightColumnIndex]->toString();
+
         for(int j=0;j<4;j++){
             if(listPosition[j] == rightColumnIndex)
                 std::cout << j+1;
@@ -180,13 +200,20 @@ void Board::show() {
     }
 
     std::cout << std::endl << "H";
+    output = "";
     for(int i=21;i>=14;i--){
-        std::cout << "\t|" << listBox[i]->toString();
+        if(output.length()>5){
+            output = "\t|" + listBox[i]->toString();
+        }else{
+            output = "\t\t|" + listBox[i]->toString();
+        }
         for(int j=0;j<4;j++){
             if(listPosition[j] == i)
-                std::cout << listPosition[j];
+                output +=  std::to_string(j+1); //numero giocatore
         }
-        std::cout << "|";
+        output += "|";
+        std::cout << output;
+
     }
     std::cout << std::endl;
 
