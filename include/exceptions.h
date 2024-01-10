@@ -3,6 +3,7 @@
 #define TESTCIRCULARARRAY_EXCEPTIONS_H
 
 #include <exception>
+#include "../include/Player.h"
 
 class completeTurn : public std::exception{
     public:

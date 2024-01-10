@@ -4,6 +4,10 @@
 
 int main(int argc, char* argv[]) {
     Board* playBoard; //TODO distruttore di board
+
+    playBoard = new Board(1);
+    playBoard->show();
+
     if(argc==2){
         //viene passato un parametro, COMPUTER oppure HUMAN
         if(std::string(argv[1])=="COMPUTER"){

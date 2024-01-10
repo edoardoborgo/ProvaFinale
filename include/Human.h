@@ -7,7 +7,7 @@
 class Human : public Player{
 
     public:
-        Human() : Player(2){};
+        Human(int playerNumber) : Player(2, playerNumber){};
         int getPlayerType() override;
 
     protected:

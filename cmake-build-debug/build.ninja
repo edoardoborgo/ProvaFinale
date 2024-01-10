@@ -79,8 +79,20 @@ build CMakeFiles/ProvaFinale.dir/src/Pc.cpp.obj: CXX_COMPILER__ProvaFinale_Debug
   OBJECT_DIR = CMakeFiles\ProvaFinale.dir
   OBJECT_FILE_DIR = CMakeFiles\ProvaFinale.dir\src
 
-build CMakeFiles/ProvaFinale.dir/src/BoardBox.cpp.obj: CXX_COMPILER__ProvaFinale_Debug C$:/Users/borgo/Documents/GitHub/ProvaFinale/src/BoardBox.cpp || cmake_object_order_depends_target_ProvaFinale
-  DEP_FILE = CMakeFiles\ProvaFinale.dir\src\BoardBox.cpp.obj.d
+build CMakeFiles/ProvaFinale.dir/src/BoardManager.cpp.obj: CXX_COMPILER__ProvaFinale_Debug C$:/Users/borgo/Documents/GitHub/ProvaFinale/src/BoardManager.cpp || cmake_object_order_depends_target_ProvaFinale
+  DEP_FILE = CMakeFiles\ProvaFinale.dir\src\BoardManager.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++11
+  OBJECT_DIR = CMakeFiles\ProvaFinale.dir
+  OBJECT_FILE_DIR = CMakeFiles\ProvaFinale.dir\src
+
+build CMakeFiles/ProvaFinale.dir/src/BoardBoxBlank.cpp.obj: CXX_COMPILER__ProvaFinale_Debug C$:/Users/borgo/Documents/GitHub/ProvaFinale/src/BoardBoxBlank.cpp || cmake_object_order_depends_target_ProvaFinale
+  DEP_FILE = CMakeFiles\ProvaFinale.dir\src\BoardBoxBlank.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++11
+  OBJECT_DIR = CMakeFiles\ProvaFinale.dir
+  OBJECT_FILE_DIR = CMakeFiles\ProvaFinale.dir\src
+
+build CMakeFiles/ProvaFinale.dir/src/BoardBoxProperty.cpp.obj: CXX_COMPILER__ProvaFinale_Debug C$:/Users/borgo/Documents/GitHub/ProvaFinale/src/BoardBoxProperty.cpp || cmake_object_order_depends_target_ProvaFinale
+  DEP_FILE = CMakeFiles\ProvaFinale.dir\src\BoardBoxProperty.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu++11
   OBJECT_DIR = CMakeFiles\ProvaFinale.dir
   OBJECT_FILE_DIR = CMakeFiles\ProvaFinale.dir\src
@@ -93,7 +105,7 @@ build CMakeFiles/ProvaFinale.dir/src/BoardBox.cpp.obj: CXX_COMPILER__ProvaFinale
 #############################################
 # Link the executable ProvaFinale.exe
 
-build ProvaFinale.exe: CXX_EXECUTABLE_LINKER__ProvaFinale_Debug CMakeFiles/ProvaFinale.dir/src/main.cpp.obj CMakeFiles/ProvaFinale.dir/src/Player.cpp.obj CMakeFiles/ProvaFinale.dir/src/Board.cpp.obj CMakeFiles/ProvaFinale.dir/src/Human.cpp.obj CMakeFiles/ProvaFinale.dir/src/Pc.cpp.obj CMakeFiles/ProvaFinale.dir/src/BoardBox.cpp.obj
+build ProvaFinale.exe: CXX_EXECUTABLE_LINKER__ProvaFinale_Debug CMakeFiles/ProvaFinale.dir/src/main.cpp.obj CMakeFiles/ProvaFinale.dir/src/Player.cpp.obj CMakeFiles/ProvaFinale.dir/src/Board.cpp.obj CMakeFiles/ProvaFinale.dir/src/Human.cpp.obj CMakeFiles/ProvaFinale.dir/src/Pc.cpp.obj CMakeFiles/ProvaFinale.dir/src/BoardManager.cpp.obj CMakeFiles/ProvaFinale.dir/src/BoardBoxBlank.cpp.obj CMakeFiles/ProvaFinale.dir/src/BoardBoxProperty.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\ProvaFinale.dir

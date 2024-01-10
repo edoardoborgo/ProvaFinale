@@ -5,7 +5,7 @@
 class Player{
 
 public:
-    Player(int playerType);
+    Player(int playerType, int playerNumber);
     int throwDices();
     void deposit(int value);
     void withdraw(int value);
@@ -13,7 +13,7 @@ public:
     int getMoney();
     //void setMoney(int value);
     int getPlayerNumber();
-    virtual int getPlayerType();
+    virtual int getPlayerType(){ return 0; };
 
 protected:
     int money;

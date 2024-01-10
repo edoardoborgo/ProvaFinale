@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <iostream>
 #include <initializer_list>
+#include <random>
 
 
 
@@ -49,21 +50,21 @@ void Board::nextPlayerRound(){
 }
 
 Board::Board(int gameType){
-    Player p = Pc();
-    Player pp = Pc();
-    Player ppp = Pc();
+    Player* p = new Pc(1);
+    Player* pp = new Pc(2);
+    Player* ppp = new Pc(3);
     Player* pppp;
 
     if(gameType == 1){
-        pppp = new Pc();
+        pppp = new Pc(4);
         gameMode = 1;
 
     } else if( gameType == 2){
-        pppp = new Human();
+        pppp = new Human(4);
         gameMode = 2;
     }
 
-    setPlayersOrder(&p, &pp, &ppp, pppp);
+    setPlayersOrder(p, pp, ppp, pppp);
     assignBoxType();
 
 }
@@ -91,13 +92,13 @@ void Board::setPlayersOrder(Player* p, Player* pp, Player* ppp, Player* pppp){
     }
 
 
-    //addPlayer({arrP[0], arrP[1], arrP[2], arrP[3]});
+    addPlayer({arrP[0], arrP[1], arrP[2], arrP[3]});
 
 }
 
-/*void Board::addPlayer(std::initializer_list<Player*> lst){
-
-}*/
+void Board::addPlayer(std::initializer_list<Player*> lst){
+    std::copy(lst.begin(), lst.end(), listPlayer);
+}
 
 void Board::assignBoxType(){
     listBox[0] = new BoardBoxBlank('P');
@@ -107,68 +108,88 @@ void Board::assignBoxType(){
 
     //1 std, 2 eco, 3 lusso
 
+    std::random_device dev;
+    std::mt19937 rng(dev());
+    std::uniform_int_distribution<std::mt19937::result_type> distLength(1,getLength()); // distribution in range [1, 6]
+
+    int randomIndex;
     //assegnazione caselle economiche
     for(int i=0;i<8;i++){
-        int n = std::rand() % getLength();
-        if (listBox[n]->getBoxType() == "")      //check che non abbia già un tipo
-            listBox[n] = new BoardBoxProperty('E',6,3,3,2,4);
+        do{
+            randomIndex = distLength(rng);
+        }while(listBox[randomIndex] != nullptr);
+
+        if (listBox[randomIndex] == nullptr /*||  listBox[n]->getBoxType() == ""*/){      //check che non abbia già un tipo
+            listBox[randomIndex] = new BoardBoxProperty('E',6,3,3,2,4);
+        }
     }
 
     //assegnazione caselle standard
     for(int i=0;i<10;i++){
-        int n = std::rand() % getLength();
+        do{
+            randomIndex = distLength(rng);
+        }while(listBox[randomIndex] != nullptr);
 
-        if (listBox[n]->getBoxType() == "")      //check che non abbia già un tipo
-            listBox[n] = new BoardBoxProperty('S',10, 5, 5, 4, 8);
+        if (listBox[randomIndex] == nullptr /*||  listBox[n]->getBoxType() == ""*/)      //check che non abbia già un tipo
+            listBox[randomIndex] = new BoardBoxProperty('S',10, 5, 5, 4, 8);
     }
 
 
     //assegnazione caselle lusso
     for(int i=0;i<6;i++){
-        int n = std::rand() % getLength();
-        if (listBox[n]->getBoxType() == "")      //check che non abbia già un tipo
-            listBox[n] = new BoardBoxProperty('L',20,10,10,7,14);
+        do{
+            randomIndex = distLength(rng);
+        }while(listBox[randomIndex] != nullptr);
+        if (listBox[randomIndex] == nullptr /*||  listBox[n]->getBoxType() == ""*/)      //check che non abbia già un tipo
+            listBox[randomIndex] = new BoardBoxProperty('L',20,10,10,7,14);
     }
 }
 
 void Board::show() {
-    std::cout << "\t\t 1\t\t 2\t\t 3\t\t 4\t\t 5\t\t 6\t\t 7\t\t 8\nA";
+    std::cout << "\t 1\t 2\t 3\t 4\t 5\t 6\t 7\t 8\nA";
     //output prima riga
+
+    //std::cout << listBox[0]->toString();
+    //std::cout << listBox[1]->toString();
+
     for(int i=0;i<8;i++){
-        std::cout << "\t\t|" << listBox[i]->toString();
+        std::cout << "\t|" << listBox[i]->toString();
         for(int j=0;j<4;j++){
             if(listPosition[j] == i)
-                std::cout << listPosition[j];
+                std::cout << j+1; //numero giocatore
         }
         std::cout << '|';
     }
     char lineIndex = 'B';
     int leftColumnIndex=27, rightColumnIndex=8;
     for(int i=0;i<6;i++){
-        std::cout << std::endl << lineIndex << "\t\t|" << listBox[leftColumnIndex]->toString();
+        std::cout << std::endl << lineIndex << "\t|" << listBox[leftColumnIndex]->toString();
         for(int j=0;j<4;j++){
-            if(listPosition[j] == i)
-                std::cout << listPosition[j];
+            if(listPosition[j] == leftColumnIndex)
+                std::cout << j+1;
         }
-        std::cout << "|\t\t\t\t\t\t\t\t\t\t\t\t\t|" << listBox[rightColumnIndex]->toString();
+        std::cout << "|\t\t\t\t\t\t\t|" << listBox[rightColumnIndex]->toString();
+        for(int j=0;j<4;j++){
+            if(listPosition[j] == rightColumnIndex)
+                std::cout << j+1;
+        }
+        std::cout << "|";
+        leftColumnIndex--;
+        rightColumnIndex++;
+        lineIndex++;
+    }
+
+    std::cout << std::endl << "H";
+    for(int i=21;i>=14;i--){
+        std::cout << "\t|" << listBox[i]->toString();
         for(int j=0;j<4;j++){
             if(listPosition[j] == i)
                 std::cout << listPosition[j];
         }
         std::cout << "|";
-        leftColumnIndex--;
-        rightColumnIndex++;
     }
+    std::cout << std::endl;
 
-    std::cout << std::endl << "H";
-    for(int i=21;i>14;i--){
-        std::cout << "\t\t|" << listBox[i]->toString();
-        for(int j=0;j<4;j++){
-            if(listPosition[j] == i)
-                std::cout << listPosition[j];
-        }
-        std::cout << '|';
-    }
 
     /*std::cout << "A\t\t|" << listBox[0] << "|\t\t|1|\t\t|2|\t\t|3|\t\t|4|\t\t|5|\t\t|6|\t\t|7|" << std::endl;
     std::cout << "B\t\t|" << listBox[27]->toString() << "|\t\t\t\t\t\t\t\t\t\t\t\t\t|8|\t" << std::endl;

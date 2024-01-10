@@ -3,14 +3,20 @@
 #include "../include/exceptions.h"
 #include <cstdlib>
 #include <iostream>
+#include <random>
 
-Player::Player(int playerType_) : money(100), playerType(playerType_){}
+Player::Player(int playerType_, int playerNumber_) : money(100), playerType(playerType_), playerNumber(playerNumber_){}
 
 int Player::throwDices(){
-    int firstDice = std::rand() % 6 + 1;
-    int secondDice = std::rand() % 6 + 1;
+    std::random_device dev;
+    std::mt19937 rng(dev());
+    std::uniform_int_distribution<std::mt19937::result_type> dist6(1,6); // distribution in range [1, 6]
 
-    std::cout << "Giocatore " << playerNumber << " ha tirato i dadi ottenendo un valore di " << (firstDice + secondDice) ;
+
+    int firstDice = dist6(rng);
+    int secondDice = dist6(rng);;
+
+    std::cout << "Giocatore " << playerNumber << " ha tirato i dadi ottenendo un valore di " << (firstDice + secondDice) << std::endl;
     return (firstDice+secondDice);
 }
 

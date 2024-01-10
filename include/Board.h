@@ -9,9 +9,10 @@
 class Board{
     public:
         Board(int gameType);
+
         void move();
-        bool EndedGame();
-        //void addPlayer(std::initializer_list<Player*>);
+        bool endedGame();
+        void addPlayer(std::initializer_list<Player*>);
         int getLength();
         void show();
         void deletePlayer(Player* actualPlayer);
