@@ -5,6 +5,7 @@
 #include "BoardBox.h"
 #include "Player.h"
 #include <initializer_list>
+#include <vector>
 
 class Board{
     public:
@@ -21,7 +22,10 @@ class Board{
     private:
         int gameMode;
         int playerRound;
-        BoardBox* listBox[28];
+        int dim = 28;
+        std::vector<BoardBox*> listBox;
+        //BoardBox* listBox[28];
+        //std::vector<Player*> listPlayer;
         Player* listPlayer[4];
         int listPosition[4];
 

@@ -2,7 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "ProvaFinale"
+			"path" : "ProvaFinale.exe"
+		},
+		{
+			"path" : "ProvaFinale.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -35,7 +38,10 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -std=gnu++11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics"
+					"fragment" : "-g -fdiagnostics-color=always"
+				},
+				{
+					"fragment" : "-std=gnu++11"
 				}
 			],
 			"language" : "CXX",
@@ -72,12 +78,16 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
+			},
+			{
+				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
+				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
 	"name" : "ProvaFinale",
-	"nameOnDisk" : "ProvaFinale",
+	"nameOnDisk" : "ProvaFinale.exe",
 	"paths" : 
 	{
 		"build" : ".",

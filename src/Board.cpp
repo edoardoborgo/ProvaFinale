@@ -42,7 +42,8 @@ void Board::deletePlayer(Player* actualPlayer){
 }
 
 int Board::getLength() {
-    return sizeof(listBox) / sizeof(listBox[0]);
+    //return sizeof(listBox) / sizeof(listBox[0]);
+    return listBox.size();
 }
 
 void Board::nextPlayerRound(){
@@ -66,7 +67,6 @@ Board::Board(int gameType){
 
     setPlayersOrder(p, pp, ppp, pppp);
     assignBoxType();
-
 }
 
 void Board::setPlayersOrder(Player* p, Player* pp, Player* ppp, Player* pppp){
@@ -97,10 +97,12 @@ void Board::setPlayersOrder(Player* p, Player* pp, Player* ppp, Player* pppp){
 }
 
 void Board::addPlayer(std::initializer_list<Player*> lst){
+    //std::copy(lst.begin(), lst.end(), std::back_inserter(listPlayer));
     std::copy(lst.begin(), lst.end(), listPlayer);
 }
 
 void Board::assignBoxType(){
+    listBox.reserve(28);
     listBox[0] = new BoardBoxBlank('P');
     listBox[7] = new BoardBoxBlank(' ');
     listBox[14] = new BoardBoxBlank(' ');
@@ -110,14 +112,14 @@ void Board::assignBoxType(){
 
     std::random_device dev;
     std::mt19937 rng(dev());
-    std::uniform_int_distribution<std::mt19937::result_type> distLength(1,getLength()); // distribution in range [1, 6]
+    std::uniform_int_distribution<std::mt19937::result_type> distLength(1,28); // distribution in range [1, 6]
 
     int randomIndex;
     //assegnazione caselle economiche
     for(int i=0;i<8;i++){
         do{
             randomIndex = distLength(rng);
-        }while(listBox[randomIndex] != nullptr);
+        }while(listBox[randomIndex]->getBoxType() != "");
 
         if (listBox[randomIndex] == nullptr /*||  listBox[n]->getBoxType() == ""*/){      //check che non abbia già un tipo
             listBox[randomIndex] = new BoardBoxProperty('E',6,3,3,2,4);
