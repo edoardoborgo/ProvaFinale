@@ -83,7 +83,7 @@ void Board::setPlayersOrder(Player* p, Player* pp, Player* ppp, Player* pppp){
 
     for (int i = 0; i < 4 - 1; ++i) {
         for (int j = 0; j < 4 - i - 1; ++j) {
-            if (arrD[j] > arrD[j + 1]) {
+            if (arrD[j] < arrD[j + 1]) {
                 // Scambia gli elementi se non sono in ordine
                 std::swap(arrD[j], arrD[j + 1]);
                 std::swap(arrP[j], arrP[j + 1]);
