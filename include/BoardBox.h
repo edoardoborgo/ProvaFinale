@@ -10,7 +10,7 @@ class BoardBox{
 public:
     BoardBox(){};
     void setBoxType(int boxType_){ boxType = boxType_; };
-    virtual std::string getBoxType(){ return "";};
+    virtual std::string getBoxType(){ return boxType;};
     virtual char getTypeCharacter(){ return ' '; };
     virtual void eraseOwner(){};
     virtual Player* getOwner(){ return nullptr; };
@@ -19,7 +19,7 @@ public:
 
 protected:
     BoardBox(std::string boxType_, char typeCharacter_) : boxType(boxType_), typeCharacter(typeCharacter_) {};
-    std::string boxType; // property-proprietà  blank-vuota
+    std::string boxType = ""; // property-proprietà  blank-vuota
     char typeCharacter; //per stampare tabellone
 
 private:

@@ -5,7 +5,7 @@
 #include <iostream>
 #include <random>
 
-Player::Player(int playerType_, int playerNumber_) : money(100), playerType(playerType_), playerNumber(playerNumber_){}
+Player::Player(int playerType_, int playerNumber_) : money(20), playerType(playerType_), playerNumber(playerNumber_){}
 
 int Player::throwDices(){
     std::random_device dev;
@@ -23,10 +23,11 @@ int Player::throwDices(){
 void Player::deposit(int value){
     money += value;
 }
-void Player::withdraw(int value){
-    if(money-value>=0)
+void Player::withdraw(int value) {
+    if (money - value >= 0) {
         money -= value;
-    else
+
+    }else
         throw outOfMoney(this); //TODO controllo puntatori
 }
 

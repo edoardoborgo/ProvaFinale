@@ -5,8 +5,8 @@
 int main(int argc, char* argv[]) {
     Board* playBoard; //TODO distruttore di board
 
-    playBoard = new Board(1);
-    playBoard->show();
+    /*playBoard = new Board(1);
+    playBoard->show();*/
 
     if(argc==2){
         //viene passato un parametro, COMPUTER oppure HUMAN
@@ -22,7 +22,8 @@ int main(int argc, char* argv[]) {
             return 0;
         }
 
-        while(true){
+        while(!playBoard->endedGame()){
+            playBoard->show();
             playBoard->move();
             playBoard->nextPlayerRound();
         }

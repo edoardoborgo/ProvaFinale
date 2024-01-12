@@ -23,7 +23,7 @@ public:
 protected:
     int price, housePrice, hotelPrice, houseNightPrice, hotelNightPrice;
     Player* owner = nullptr;
-    int propertyLevel=-1; //0-terreno, 1-casa, 2-hotel
+    int propertyLevel=0; //0->non di propeietà 1->di proprietà 2->con casa 3->con albergo
     int getUpgradeCost();
     int getRentCost();
     void upgradePropertyLevel();
