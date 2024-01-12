@@ -6,13 +6,13 @@
 
 class Human : public Player{
 
-    public:
-        Human(int playerNumber) : Player(2, playerNumber){};
-        int getPlayerType() override;
+public:
+    Human(int playerNumber) : Player(2, playerNumber){};
+    int getPlayerType() override;
 
-    protected:
+protected:
 
-    private:
+private:
 };
 
 #endif //PROVAFINALE_HUMAN_H

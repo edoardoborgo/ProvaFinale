@@ -10,7 +10,6 @@
 class Board{
     public:
         Board(int gameType);
-
         void move();
         bool endedGame();
         void addPlayer(std::initializer_list<Player*>);
@@ -23,8 +22,8 @@ class Board{
         int gameMode;
         int playerRound;
         int dim = 28;
-        std::vector<BoardBox*> listBox;
-        //BoardBox* listBox[28];
+        //std::vector<BoardBox*> listBox;
+        BoardBox* listBox[28];
         //std::vector<Player*> listPlayer;
         Player* listPlayer[4];
         int listPosition[4];

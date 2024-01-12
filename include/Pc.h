@@ -7,7 +7,7 @@
 class Pc : public Player{
 
     public:
-        Pc(int playerNumber) : Player(1, playerNumber){};
+        Pc(int playerNumber_) : Player(1, playerNumber_){};
         int getPlayerType() override;
 
     protected:

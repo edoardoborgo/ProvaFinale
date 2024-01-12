@@ -6,19 +6,19 @@
 
 class BoardBoxBlank : public BoardBox{
 
-    public:
-        BoardBoxBlank();
-        BoardBoxBlank(char typeCharacter_);
-        std::string getBoxType() override;
-        char getTypeCharacter() override;
-        void action(Player* actualPlayer) override;
-        void eraseOwner() override;
-        Player* getOwner() override;
-        std::string toString() override;
+public:
+    BoardBoxBlank();
+    BoardBoxBlank(char typeCharacter_);
+    std::string getBoxType() override;
+    char getTypeCharacter() override;
+    void action(Player* actualPlayer) override;
+    void eraseOwner() override;
+    Player* getOwner() override;
+    std::string toString() override;
 
-    protected:
+protected:
 
-    private:
+private:
 
 };
 

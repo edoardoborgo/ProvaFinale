@@ -42,8 +42,8 @@ void Board::deletePlayer(Player* actualPlayer){
 }
 
 int Board::getLength() {
-    //return sizeof(listBox) / sizeof(listBox[0]);
-    return listBox.size();
+    return sizeof(listBox) / sizeof(listBox[0]);
+    //return listBox.size();
 }
 
 void Board::nextPlayerRound(){
@@ -102,7 +102,7 @@ void Board::addPlayer(std::initializer_list<Player*> lst){
 }
 
 void Board::assignBoxType(){
-    listBox.reserve(28);
+    //listBox.reserve(28);
     listBox[0] = new BoardBoxBlank('P');
     listBox[7] = new BoardBoxBlank(' ');
     listBox[14] = new BoardBoxBlank(' ');
@@ -119,11 +119,21 @@ void Board::assignBoxType(){
     for(int i=0;i<8;i++){
         do{
             randomIndex = distLength(rng);
-        }while(listBox[randomIndex]->getBoxType() != "");
+        }while(listBox[randomIndex] != nullptr);
 
         if (listBox[randomIndex] == nullptr /*||  listBox[n]->getBoxType() == ""*/){      //check che non abbia già un tipo
             listBox[randomIndex] = new BoardBoxProperty('E',6,3,3,2,4);
         }
+
+    //assegnazione caselle economiche
+    for(int i=0;i<8;i++){
+        do{
+            randomIndex = distLength(rng);
+        }while(listBox[randomIndex] != nullptr);
+
+        if (listBox[randomIndex]->getBoxType() == "")      //check che non abbia già un tipo
+            listBox[randomIndex] = new BoardBoxProperty('E',6,3,3,2,4);
+
     }
 
     //assegnazione caselle standard
@@ -132,7 +142,7 @@ void Board::assignBoxType(){
             randomIndex = distLength(rng);
         }while(listBox[randomIndex] != nullptr);
 
-        if (listBox[randomIndex] == nullptr /*||  listBox[n]->getBoxType() == ""*/)      //check che non abbia già un tipo
+        if (listBox[randomIndex]->getBoxType() == "")      //check che non abbia già un tipo
             listBox[randomIndex] = new BoardBoxProperty('S',10, 5, 5, 4, 8);
     }
 
@@ -142,14 +152,15 @@ void Board::assignBoxType(){
         do{
             randomIndex = distLength(rng);
         }while(listBox[randomIndex] != nullptr);
-        if (listBox[randomIndex] == nullptr /*||  listBox[n]->getBoxType() == ""*/)      //check che non abbia già un tipo
+        if (listBox[randomIndex]->getBoxType() == "")      //check che non abbia già un tipo
             listBox[randomIndex] = new BoardBoxProperty('L',20,10,10,7,14);
     }
 }
-
+/*
 void Board::show() {
     std::cout << "\t\t 1\t\t 2\t\t 3\t\t 4\t\t 5\t\t 6\t\t 7\t\t 8\nA";
     //output prima riga
+<<<<<<< HEAD
 
     std::string output;
 
@@ -163,6 +174,13 @@ void Board::show() {
         for(int j=0;j<4;j++){
             if(listPosition[j] == i)
                 output +=  std::to_string(j+1); //numero giocatore
+=======
+    for(int i=0;i<8;i++){
+        std::cout << "\t\t|" << listBox[i]->toString();
+        for(int j=0;j<4;j++){
+            if(listPosition[j] == i)
+                std::cout << listPosition[j];
+>>>>>>> parent of ea96e1c (update)
         }
         output += "|";
         std::cout << output;
@@ -172,6 +190,7 @@ void Board::show() {
     int leftColumnIndex=27, rightColumnIndex=8;
 
     for(int i=0;i<6;i++){
+<<<<<<< HEAD
         if(output.length()>5){
             output = lineIndex;
             output += "\t|" + listBox[leftColumnIndex]->toString();
@@ -209,16 +228,38 @@ void Board::show() {
         }else{
             output = "\t\t|" + listBox[i]->toString();
         }
+=======
+        std::cout << std::endl << lineIndex << "\t\t|" << listBox[leftColumnIndex]->toString();
+        for(int j=0;j<4;j++){
+            if(listPosition[j] == i)
+                std::cout << listPosition[j];
+        }
+        std::cout << "|\t\t\t\t\t\t\t\t\t\t\t\t\t|" << listBox[rightColumnIndex]->toString();
+>>>>>>> parent of ea96e1c (update)
         for(int j=0;j<4;j++){
             if(listPosition[j] == i)
                 output +=  std::to_string(j+1); //numero giocatore
         }
+<<<<<<< HEAD
         output += "|";
         std::cout << output;
 
+=======
+        std::cout << "|";
+        leftColumnIndex--;
+        rightColumnIndex++;
+>>>>>>> parent of ea96e1c (update)
     }
-    std::cout << std::endl;
 
+    std::cout << std::endl << "H";
+    for(int i=21;i>14;i--){
+        std::cout << "\t\t|" << listBox[i]->toString();
+        for(int j=0;j<4;j++){
+            if(listPosition[j] == i)
+                std::cout << listPosition[j];
+        }
+        std::cout << '|';
+    }
 
     /*std::cout << "A\t\t|" << listBox[0] << "|\t\t|1|\t\t|2|\t\t|3|\t\t|4|\t\t|5|\t\t|6|\t\t|7|" << std::endl;
     std::cout << "B\t\t|" << listBox[27]->toString() << "|\t\t\t\t\t\t\t\t\t\t\t\t\t|8|\t" << std::endl;
@@ -229,4 +270,5 @@ void Board::show() {
     std::cout << "G\t\t|22|\t\t\t\t\t\t\t\t\t\t\t\t\t|13|\t" << std::endl;
     std::cout << "H\t\t|21|\t|20|\t|19|\t|18|\t|17|\t|16|\t|15|\t|14|" << std::endl;
      */
+
 }
