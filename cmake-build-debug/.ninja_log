@@ -10,3 +10,14 @@
 1	266	7267597307218237	build.ninja	cd4d8982e2b2e90
 12	374	7267571247079096	CMakeFiles/ProvaFinale.dir/src/BoardBoxBlank.cpp.obj	fc3adbf0f9a2a8a7
 14	2019	7267590657436293	CMakeFiles/ProvaFinale.dir/src/BoardBox.cpp.obj	137d07322be0a6e7
+12	667	7267598242939142	CMakeFiles/ProvaFinale.dir/src/Player.cpp.obj	5c45773d6438a704
+385	913	7267598715250887	CMakeFiles/ProvaFinale.dir/src/Pc.cpp.obj	71b8be4c8bc1a100
+150	1074	7267598716490791	CMakeFiles/ProvaFinale.dir/src/BoardBoxBlank.cpp.obj	fc3adbf0f9a2a8a7
+913	1079	7267598717030689	CMakeFiles/ProvaFinale.dir/src/Human.cpp.obj	acb937cae2b9c3ac
+5	1084	7267598716925689	CMakeFiles/ProvaFinale.dir/src/main.cpp.obj	827d23b8670357bd
+1079	1338	7267598719354028	CMakeFiles/ProvaFinale.dir/src/BoardManager.cpp.obj	8ad20b3810cce55a
+12	1398	7267598720363879	CMakeFiles/ProvaFinale.dir/src/Board.cpp.obj	78e3998e40245386
+1075	1539	7267598721778003	CMakeFiles/ProvaFinale.dir/src/BoardBoxProperty.cpp.obj	d7e5b40d86bd9ad1
+4	531	7267599227633504	CMakeFiles/ProvaFinale.dir/src/main.cpp.obj	827d23b8670357bd
+14	664	7267599229098361	CMakeFiles/ProvaFinale.dir/src/Board.cpp.obj	78e3998e40245386
+664	794	7267599230327124	ProvaFinale.exe	8a86c82113944a7f

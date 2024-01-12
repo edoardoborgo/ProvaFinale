@@ -26,3 +26,5 @@ private:
     int index;
 
 };
+
+#endif //PROVAFINALE_BOARDBOX_H
