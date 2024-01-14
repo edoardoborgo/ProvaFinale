@@ -1,33 +1,53 @@
 #include "../include/BoardBoxProperty.h"
+#include "../include/exceptions.h"
 
 BoardBoxProperty::BoardBoxProperty() {};
 BoardBoxProperty::BoardBoxProperty(char typeCharacter_, int price_, int housePrice_, int hotelPrice_, int houseNightPrice_, int hotelNightPrice_) : BoardBox("property", typeCharacter_),  price(price_), housePrice(housePrice_), hotelPrice(hotelPrice_), houseNightPrice(houseNightPrice_), hotelNightPrice(hotelNightPrice_){ propertyLevel=0;};
 std::string BoardBoxProperty::getBoxType() { return boxType; }
 char BoardBoxProperty::getTypeCharacter() {return typeCharacter; }
-int BoardBoxProperty::getPropertyLevel() const {return propertyLevel;};
+int BoardBoxProperty::getPropertyLevel() {return propertyLevel;};
 
 void BoardBoxProperty::action(Player* actualPlayer) {
     if(owner!=nullptr && owner==actualPlayer) {
-        std::cout<<"Proprietà mia :)"<<std::endl;
-        //miglioramento proprietà, se migliorabile
+        std::cout<<"Proprieta' mia :)"<<std::endl;
+        //il giocatore si trova in una casella di sua proprietà, può migliorarla se possibile
         if (propertyLevel == 1 || propertyLevel==2) {
             //migliorabile
             if (actualPlayer->getPlayerType() == 1) {
-                //pc, se ha abbastanza soldi compra/migliora
-                if (actualPlayer->getMoney() >= getUpgradeCost()){
-                    actualPlayer->withdraw(getUpgradeCost());
-                    upgradePropertyLevel();
-                    std::cout<<"Proprietà migliorata ora :)"<<std::endl;
+                //probabilità del 25%, se possiede abbastanza soldi
+                if(actualPlayer->takeDecision()){
+                    //pc, se ha abbastanza soldi compra/migliora
+                    if (actualPlayer->getMoney() >= getUpgradeCost()){
+                        actualPlayer->withdraw(getUpgradeCost());
+                        upgradePropertyLevel();
+
+                        if(propertyLevel==2){
+                            //stampa a console i dettagli del turno attuale, log 5
+                            std::cout<<"Giocatore "<<actualPlayer->getPlayerNumber()<<" ha costruito una casa sul terreno "<<actualPlayer->getPosition()<<std::endl;
+                        }else if(propertyLevel==3) {
+                            //stampa a console i dettagli del turno attuale, log 6
+                            std::cout << "Giocatore " << actualPlayer->getPlayerNumber() << " ha migliorato una casa in albergo sul terreno "<< actualPlayer->getPosition() << std::endl;
+                        }
+                    }
                 }
             }else{
                 //human, chiedo cosa vuole fare solo se ha abbastanza soldi
                 if (actualPlayer->getMoney() >= getUpgradeCost()){
-                    std::cout << "Vuoi migliorare la proprietà? costo: "<<getUpgradeCost()<<"$.";
+                    std::cout << "Vuoi migliorare la proprietà'? costo: "<<getUpgradeCost()<<"$.";
                     std::string input;
                     std::getline(std::cin, input);
                     if(input==std::string("s")){
                         actualPlayer->withdraw(getUpgradeCost());
                         upgradePropertyLevel();
+                        if(propertyLevel==2){
+                            //stampa a console i dettagli del turno attuale, log 5
+                            std::cout<<"Giocatore "<<actualPlayer->getPlayerNumber()<<" ha costruito una casa sul terreno "<<actualPlayer->getPosition()<<std::endl;
+                        }else if(propertyLevel==3) {
+                            //stampa a console i dettagli del turno attuale, log 6
+                            std::cout << "Giocatore " << actualPlayer->getPlayerNumber() << " ha migliorato una casa in albergo sul terreno "<< actualPlayer->getPosition() << std::endl;
+                        }
+                    }else if(input==std::string("show")){
+                        throw showRequestException();
                     }
                 }
             }
@@ -36,28 +56,36 @@ void BoardBoxProperty::action(Player* actualPlayer) {
         //proprietà occupata ma non dall'actual player
         actualPlayer->withdraw(getRentCost());
         owner->deposit(getRentCost());
-        std::cout<<"Proprietà occupata :("<<std::endl;
-        std::cout<<"Affitto pagato :( "<<getRentCost()<<std::endl;
+
+        //stampa a console i dettagli del turno attuale, log 7
+        std::cout << "Giocatore " << actualPlayer->getPlayerNumber() << " ha pagato "<< getRentCost() << " fiorini a giocatore "<< owner->getPlayerNumber()<<" per pernottamento nella casella "<< actualPlayer->getPosition()<< std::endl;
     }else if(owner==nullptr){
         //acquistabile
-        std::cout<<"Proprietà libera :)"<<std::endl;
         if (actualPlayer->getPlayerType() == 1) {
             //pc, se ha abbastanza soldi compra/migliora
             if (actualPlayer->getMoney() >= getUpgradeCost()){
-                actualPlayer->withdraw(getUpgradeCost());
-                owner=actualPlayer;
-                std::cout<<"Proprietà acquistata ora :)"<<std::endl;
-                upgradePropertyLevel();
+                //probabilità del 25%, se possiede abbastanza soldi
+                if(actualPlayer->takeDecision()){
+                    actualPlayer->withdraw(getUpgradeCost());
+                    owner=actualPlayer;
+                    upgradePropertyLevel();
+                    //stampa a console i dettagli del turno attuale, log 4
+                    std::cout<<"Giocatore "<<actualPlayer->getPlayerNumber()<<" ha acquistato il terreno "<<actualPlayer->getPosition()<<std::endl;
+                }
             }
         }else{
             //human, chiedo cosa vuole fare solo se ha abbastanza soldi
             if (actualPlayer->getMoney() >= getUpgradeCost()) {
-                std::cout << "Vuoi acquistare la proprietà? costo: " << getUpgradeCost() << "$.";
+                std::cout << "Vuoi acquistare la proprieta'? costo: " << getUpgradeCost() << " fiorini"<<std::endl;
                 std::string input;
                 std::getline(std::cin, input);
                 if (input == std::string("s")) {
                     actualPlayer->withdraw(getUpgradeCost());
                     owner=actualPlayer;
+                    //stampa a console i dettagli del turno attuale, log 4
+                    std::cout<<"Giocatore "<<actualPlayer->getPlayerNumber()<<" ha acquistato il terreno "<<actualPlayer->getPosition()<<std::endl;
+                }else if(input==std::string("show")){
+                    throw showRequestException();
                 }
             }
         }
@@ -65,7 +93,7 @@ void BoardBoxProperty::action(Player* actualPlayer) {
 }
 
 void BoardBoxProperty::eraseOwner() {
-    //cancella il proprietario e ri-inizializza l'oggetto
+    //cancella il proprietario e riinizializza l'oggetto
     owner=nullptr;
     propertyLevel=0;
 }
@@ -114,4 +142,5 @@ int BoardBoxProperty::getRentCost(){
         return 0;
 }
 void BoardBoxProperty::upgradePropertyLevel(){ propertyLevel++; }
-BoardBoxProperty::~BoardBoxProperty(){};
+//TODO distruttore rimosso
+//BoardBoxProperty::~BoardBoxProperty(){};

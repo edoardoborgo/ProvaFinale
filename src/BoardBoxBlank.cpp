@@ -1,5 +1,6 @@
 #include "../include/BoardBoxBlank.h"
 
+//costruttori
 BoardBoxBlank::BoardBoxBlank(){}
 BoardBoxBlank::BoardBoxBlank(char typeCharacter_) : BoardBox("blank", typeCharacter_){}
 

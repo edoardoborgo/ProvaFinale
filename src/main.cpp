@@ -3,10 +3,7 @@
 #include "../include/Board.h"
 
 int main(int argc, char* argv[]) {
-    Board* playBoard; //TODO distruttore di board
-
-    /*playBoard = new Board(1);
-    playBoard->show();*/
+    Board* playBoard;
 
     if(argc==2){
         //viene passato un parametro, COMPUTER oppure HUMAN
@@ -23,20 +20,13 @@ int main(int argc, char* argv[]) {
         }
 
         while(!playBoard->endedGame()){
-            playBoard->show();
             playBoard->move();
             playBoard->nextPlayerRound();
         }
-
     }else{
         std::cout<<"Errore inserimento parametro scelta della modalità di gioco."<<std::endl;
         return 0;
     }
-
-
-
-
-
 
     return 0;
 }
