@@ -142,5 +142,3 @@ int BoardBoxProperty::getRentCost(){
         return 0;
 }
 void BoardBoxProperty::upgradePropertyLevel(){ propertyLevel++; }
-//TODO distruttore rimosso
-//BoardBoxProperty::~BoardBoxProperty(){};
