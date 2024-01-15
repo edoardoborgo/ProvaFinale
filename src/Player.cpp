@@ -1,9 +1,10 @@
-
 #include "../include/Player.h"
 #include "../include/exceptions.h"
+#include "../include/GlobalLogger.h"
 #include <cstdlib>
 #include <iostream>
 #include <random>
+#include <sstream>
 
 Player::Player(int playerType_, int playerNumber_) : money(20), playerType(playerType_), playerNumber(playerNumber_){}
 Player::Player(const Player &other){
@@ -21,7 +22,11 @@ int Player::throwDices(){
     int secondDice = diceThrow(rng);;
 
     //stampa a console i dettagli del turno attuale, log 2
-    std::cout << "Giocatore " << playerNumber << " ha tirato i dadi ottenendo un valore di " << (firstDice + secondDice) << std::endl;
+    std::stringstream msg;
+    msg << "Giocatore " << playerNumber << " ha tirato i dadi ottenendo un valore di " << (firstDice + secondDice)<<std::endl;
+    std::cout<<msg.str();
+    //stampa su file i dettagli del turno attuale, log F2
+    logger.log(msg.str());
     return (firstDice+secondDice);
 }
 

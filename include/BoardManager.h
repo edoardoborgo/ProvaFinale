@@ -11,4 +11,6 @@ char getLetter(int index);
 //ottiene il numero per indicizzare la casella
 int getNumber(int index);
 
+
+
 #endif //PROVAFINALE_BOARDMANAGER_H

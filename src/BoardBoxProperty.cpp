@@ -1,5 +1,7 @@
+#include <sstream>
 #include "../include/BoardBoxProperty.h"
 #include "../include/exceptions.h"
+#include "../include/GlobalLogger.h"
 
 BoardBoxProperty::BoardBoxProperty() {};
 BoardBoxProperty::BoardBoxProperty(char typeCharacter_, int price_, int housePrice_, int hotelPrice_, int houseNightPrice_, int hotelNightPrice_) : BoardBox("property", typeCharacter_),  price(price_), housePrice(housePrice_), hotelPrice(hotelPrice_), houseNightPrice(houseNightPrice_), hotelNightPrice(hotelNightPrice_){ propertyLevel=0;};
@@ -23,10 +25,18 @@ void BoardBoxProperty::action(Player* actualPlayer) {
 
                         if(propertyLevel==2){
                             //stampa a console i dettagli del turno attuale, log 5
-                            std::cout<<"Giocatore "<<actualPlayer->getPlayerNumber()<<" ha costruito una casa sul terreno "<<actualPlayer->getPosition()<<std::endl;
+                            std::stringstream msg;
+                            msg<<"Giocatore "<<actualPlayer->getPlayerNumber()<<" ha costruito una casa sul terreno "<<actualPlayer->getPosition()<<std::endl;
+                            std::cout<<msg.str();
+                            //stampa su file i dettagli del turno attuale, log F5
+                            logger.log(msg.str());
                         }else if(propertyLevel==3) {
                             //stampa a console i dettagli del turno attuale, log 6
-                            std::cout << "Giocatore " << actualPlayer->getPlayerNumber() << " ha migliorato una casa in albergo sul terreno "<< actualPlayer->getPosition() << std::endl;
+                            std::stringstream msg;
+                            msg << "Giocatore " << actualPlayer->getPlayerNumber() << " ha migliorato una casa in albergo sul terreno "<< actualPlayer->getPosition() << std::endl;
+                            std::cout<<msg.str();
+                            //stampa su file i dettagli del turno attuale, log F6
+                            logger.log(msg.str());
                         }
                     }
                 }
@@ -41,10 +51,18 @@ void BoardBoxProperty::action(Player* actualPlayer) {
                         upgradePropertyLevel();
                         if(propertyLevel==2){
                             //stampa a console i dettagli del turno attuale, log 5
-                            std::cout<<"Giocatore "<<actualPlayer->getPlayerNumber()<<" ha costruito una casa sul terreno "<<actualPlayer->getPosition()<<std::endl;
+                            std::stringstream msg;
+                            msg<<"Giocatore "<<actualPlayer->getPlayerNumber()<<" ha costruito una casa sul terreno "<<actualPlayer->getPosition()<<std::endl;
+                            std::cout<<msg.str();
+                            //stampa su file i dettagli del turno attuale, log F5
+                            logger.log(msg.str());
                         }else if(propertyLevel==3) {
                             //stampa a console i dettagli del turno attuale, log 6
-                            std::cout << "Giocatore " << actualPlayer->getPlayerNumber() << " ha migliorato una casa in albergo sul terreno "<< actualPlayer->getPosition() << std::endl;
+                            std::stringstream msg;
+                            msg << "Giocatore " << actualPlayer->getPlayerNumber() << " ha migliorato una casa in albergo sul terreno "<< actualPlayer->getPosition() << std::endl;
+                            std::cout<<msg.str();
+                            //stampa su file i dettagli del turno attuale, log F6
+                            logger.log(msg.str());
                         }
                     }else if(input==std::string("show")){
                         throw showRequestException();
@@ -58,7 +76,12 @@ void BoardBoxProperty::action(Player* actualPlayer) {
         owner->deposit(getRentCost());
 
         //stampa a console i dettagli del turno attuale, log 7
-        std::cout << "Giocatore " << actualPlayer->getPlayerNumber() << " ha pagato "<< getRentCost() << " fiorini a giocatore "<< owner->getPlayerNumber()<<" per pernottamento nella casella "<< actualPlayer->getPosition()<< std::endl;
+        std::stringstream msg;
+        msg << "Giocatore " << actualPlayer->getPlayerNumber() << " ha pagato "<< getRentCost() << " fiorini a giocatore "<< owner->getPlayerNumber()<<" per pernottamento nella casella "<< actualPlayer->getPosition()<< std::endl;
+        std::cout << msg.str();
+        //stampa su file i dettagli del turno attuale, log F7
+        logger.log(msg.str());
+
     }else if(owner==nullptr){
         //acquistabile
         if (actualPlayer->getPlayerType() == 1) {
@@ -70,7 +93,11 @@ void BoardBoxProperty::action(Player* actualPlayer) {
                     owner=actualPlayer;
                     upgradePropertyLevel();
                     //stampa a console i dettagli del turno attuale, log 4
-                    std::cout<<"Giocatore "<<actualPlayer->getPlayerNumber()<<" ha acquistato il terreno "<<actualPlayer->getPosition()<<std::endl;
+                    std::stringstream msg;
+                    msg<<"Giocatore "<<actualPlayer->getPlayerNumber()<<" ha acquistato il terreno "<<actualPlayer->getPosition()<<std::endl;
+                    std::cout<<msg.str();
+                    //stampa su file i dettagli del turno attuale, log F4
+                    logger.log(msg.str());
                 }
             }
         }else{
@@ -83,7 +110,11 @@ void BoardBoxProperty::action(Player* actualPlayer) {
                     actualPlayer->withdraw(getUpgradeCost());
                     owner=actualPlayer;
                     //stampa a console i dettagli del turno attuale, log 4
-                    std::cout<<"Giocatore "<<actualPlayer->getPlayerNumber()<<" ha acquistato il terreno "<<actualPlayer->getPosition()<<std::endl;
+                    std::stringstream msg;
+                    msg<<"Giocatore "<<actualPlayer->getPlayerNumber()<<" ha acquistato il terreno "<<actualPlayer->getPosition()<<std::endl;
+                    std::cout<<msg.str();
+                    //stampa su file i dettagli del turno attuale, log F4
+                    logger.log(msg.str());
                 }else if(input==std::string("show")){
                     throw showRequestException();
                 }

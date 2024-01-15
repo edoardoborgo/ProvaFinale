@@ -1,10 +1,11 @@
 #include <iostream>
 #include <string>
 #include "../include/Board.h"
+#include "../include/GlobalLogger.h"
 
 int main(int argc, char* argv[]) {
     Board* playBoard;
-
+    logger.log("ciao");
     if(argc==2){
         //viene passato un parametro, COMPUTER oppure HUMAN
         if(std::string(argv[1])=="COMPUTER"){

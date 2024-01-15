@@ -4,6 +4,7 @@
 
 #include <exception>
 #include "../include/Player.h"
+#include <string>
 
 /* completeTurnException:
  * Eccezione per gestire l'accredito dei fiorini al passaggio dal via.
@@ -38,6 +39,17 @@ class showRequestException : public std::exception{
     public:
         showRequestException(){};
     private:
+};
+
+/* loggerException:
+ * Eccezione per gestire problemi legati alla scrittura su file.
+ */
+class loggerException : public std::exception{
+    public:
+        loggerException(std::string msgError_) : msgError(msgError_){};
+        std::string getMsgError(){ return msgError; }
+    private:
+        std::string msgError;
 };
 
 #endif //TESTCIRCULARARRAY_EXCEPTIONS_H

@@ -4,10 +4,12 @@
 #include "../include/BoardManager.h"
 #include "../include/Pc.h"
 #include "../include/Human.h"
+#include "../include/GlobalLogger.h"
 #include <algorithm>
 #include <iostream>
 #include <initializer_list>
 #include <random>
+#include <sstream>
 
 Board::Board(int gameType){
     //creazione di tre Computer che sono presenti in ogni partita indipendentemente dalla modalità di gioco scelta
@@ -47,7 +49,11 @@ void Board::move(){
         //accredito di 20 fiorini al giocatore attuale
         listPlayer[playerRound]->deposit(completeTurnPrize);
         //stampa a console i dettagli del turno attuale, log 1
-        std::cout<<"Giocatore "<<listPlayer[playerRound]->getPlayerNumber()<<" e' passato dal via e ha ritirato "<<completeTurnPrize<<" fiorini"<<std::endl;
+        std::stringstream msg;
+        msg<<"Giocatore "<<listPlayer[playerRound]->getPlayerNumber()<<" e' passato dal via e ha ritirato "<<completeTurnPrize<<" fiorini"<<std::endl;
+        std::cout<<msg.str();
+        //stampa su file i dettagli del turno attuale, log F1
+        logger.log(msg.str());
     }
     //aggiorno la posizione nel tabellone del giocatore attuale
     listPosition[playerRound]=newPosition;
@@ -55,7 +61,11 @@ void Board::move(){
     listPlayer[playerRound]->setPosition(newPosition);
 
     //stampa a console i dettagli del turno attuale, log 3
-    std::cout<<"Giocatore "<<listPlayer[playerRound]->getPlayerNumber()<<" e' arrivato alla casella "<<(newPosition+1)<<std::endl;
+    std::stringstream msg;
+    msg<<"Giocatore "<<listPlayer[playerRound]->getPlayerNumber()<<" e' arrivato alla casella "<<(newPosition+1)<<std::endl;
+    std::cout<<msg.str();
+    //stampa su file i dettagli del turno attuale, log F3
+    logger.log(msg.str());
 
     //interrompe il turno se un giocatore finisce i fiorini, eccezione sollevata da withdraw nel momento in cui il giocatore attuale deve pagare l'affitto ad un altro giocatore non avendo abbastanza soldi
     try{
@@ -70,15 +80,20 @@ void Board::move(){
     }
 
     //stampa a console i dettagli del turno attuale
-    std::cout<<"Fiorini: "<<listPlayer[playerRound]->getMoney()<<" giocatore numero: "<<listPlayer[playerRound]->getPlayerNumber()<<" mossa numero: "<<maxRounds<<std::endl;
+    std::cout<<"Fiorini: "<<listPlayer[playerRound]->getMoney()<<" giocatore numero: "<<listPlayer[playerRound]->getPlayerNumber()<<" mossa numero: "<<maxRounds;
 
     //passedRound per decrementare il numero di turni utili solo nelle partite tra quattro Computer, cioè gameMode=1
     if(gameMode==1){
         passedRound();
     }
 
+
+    std::cout<<std::endl;
     //stampa a console i dettagli del turno attuale, log 8
-    std::cout << "Giocatore " << listPlayer[playerRound]->getPlayerNumber() << " ha finito il turno"<<std::endl;
+    msg << "Giocatore " << listPlayer[playerRound]->getPlayerNumber() << " ha finito il turno"<<std::endl;
+    std::cout<<msg.str();
+    //stampa su file i dettagli del turno attuale, log F8
+    logger.log(msg.str());
 }
 
 
@@ -191,8 +206,11 @@ void Board::deletePlayer(Player* actualPlayer){
     activePlayers--;
 
     //stampa a console i dettagli del turno attuale, log 9
-    std::cout << "Giocatore " << actualPlayer->getPlayerNumber() << " e' stato eliminato"<<std::endl;
-
+    std::stringstream msg;
+    msg << "Giocatore " << actualPlayer->getPlayerNumber() << " e' stato eliminato"<<std::endl;
+    std::cout << msg.str();
+    //stampa su file i dettagli del turno attuale, log F9
+    logger.log(msg.str());
 }
 
 void Board::nextPlayerRound(){
@@ -361,23 +379,27 @@ bool Board::endedGame(){
             if(maxFiorini == fiorini[i])
                 exEquo++;
         }
+        std::stringstream msg;
         if(exEquo!=1){
             //stampa a console i dettagli del turno attuale, log 10
-            std::cout << "Giocatori ";
+            msg << "Giocatori ";
             for(int i=0; i<activePlayers; i++){
                 if(fiorini[i]==maxFiorini)
-                    std::cout << listPlayer[i]->getPlayerNumber() << " ";
+                    msg << listPlayer[i]->getPlayerNumber() << " ";
             }
-            std::cout<<" hanno vinto la partita" << std::endl;
+            msg <<" hanno vinto la partita" << std::endl;
         }else{
             //stampa a console i dettagli del turno attuale, log 10
-            std::cout << "Giocatore ";
+            msg << "Giocatore ";
             for(int i=0; i<activePlayers; i++){
                 if(fiorini[i]==maxFiorini)
-                    std::cout << listPlayer[i]->getPlayerNumber() << " ";
+                    msg << listPlayer[i]->getPlayerNumber() << " ";
             }
-            std::cout<<" ha vinto la partita" << std::endl;
+            msg<<" ha vinto la partita" << std::endl;
         }
+        std::cout << msg.str();
+        //stampa su file i dettagli del turno attuale, log F10
+        logger.log(msg.str());
 
         return true;
     }
@@ -385,7 +407,12 @@ bool Board::endedGame(){
     //se il numero massimo di turni non è stato raggiunto controllo che ci siano abbastanza giocatori vivi per proseguire la partita
     if(activePlayers==1){
         //stampa a console i dettagli del turno attuale, log 10
-        std::cout << "Giocatore " << listPlayer[0]->getPlayerNumber() << " ha vinto la partita" << std::endl;
+        std::stringstream msg;
+        msg << "Giocatore " << listPlayer[0]->getPlayerNumber() << " ha vinto la partita" << std::endl;
+        std::cout<<msg.str();
+        //stampa su file i dettagli del turno attuale, log F10
+        logger.log(msg.str());
+
         return true;
     }else{
         return false;
